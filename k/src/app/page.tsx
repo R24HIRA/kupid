@@ -24,10 +24,25 @@ export default function Home() {
     }
   }, []);
 
+
   // Save todos to localStorage whenever todos change
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
+
+  const handleAddTodo = () => {
+    if (newTodo.trim() === '') return;
+    
+    const todo: Todo = {
+      id: crypto.randomUUID(),
+      text: newTodo.trim(),
+      completed: false,
+    };
+    
+    setTodos([...todos, todo]);
+    setNewTodo('');
+  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
